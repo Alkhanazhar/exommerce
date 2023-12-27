@@ -1,8 +1,8 @@
 <% layout('layouts/boilerplate') %>
-    <div>
+    <div class="d-flex flex-wrap gap-4">
         <% for(let item of products){ %>
-            <div class="card" style="width: 18rem;">
-                <img src="<%=item.image%>" class="card-img-top h-25" alt="...">
+            <div class="card h-50 product" style="width: 21rem;">
+                <img src="<%=item.image%>" class="product_img card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">
                         <%=item.name%>
@@ -15,10 +15,10 @@
                             </span>
                     </h5>
                     <p class="card-text gray">
-                        <%=item.desc%>
+                        <%=item.desc.substring(0,60)%>...
                     </p>
                     <p class="card-text">
-                        <%=item.category%>
+                        <%=item.category.substring(0,20)%>...
                     </p>
                     <a href="products/<%=item._id%>" class="btn btn-primary">show</a>
                 </div>

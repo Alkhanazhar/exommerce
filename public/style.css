@@ -1,0 +1,23 @@
+
+body{
+    background: #eeeeee;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+}
+.product{
+     box-shadow: 0.1px 0.1px;
+}
+.product_img{
+    height: 270px;
+}
+.form label{
+    text-transform: capitalize;
+    font-size: 18px;
+    letter-spacing: 0.6px;
+}
+.form{
+    /* border: 0.4px solid gray; */
+    padding: 10px;
+    box-shadow: 0.1px 0.1px 2px  black;
+    border-radius: 10px;
+}

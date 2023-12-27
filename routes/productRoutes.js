@@ -7,15 +7,35 @@ router.get("/products", async (req, res) => {
   const products = await Product.find();
   res.render("products/index", { products });
 });
-router.get("/products/:id", async (req, res) => {
-  const { id } = req.params;
-  const product = await Product.findById(id);
-  res.render("products/" + { id }, { product });
+
+router.get("/products/:productid", async (req, res) => {
+  const { productid } = req.params;
+  const product = await Product.findById(productid).populate("reviews");
+  res.render("products/show", { product });
+});
+
+
+router.get("/products/:productid/edit", async (req, res) => {
+  const { productid } = req.params;
+  const product = await Product.findById(productid);
+  res.render("products/edit", { product });
 });
 
 router.post("/products", async (req, res) => {
-  console.log(req.body);
   await Product.create({ ...req.body });
+  res.redirect("/products");
+});
+
+router.patch("/products/:productid", async (req, res) => {
+  const { productid } = req.params;
+  await Product.findByIdAndUpdate(productid, { ...req.body });
+
+  res.redirect(`/products/${productid}`);
+});
+
+router.delete("/products/:productid", async (req, res) => {
+  const { productid } = req.params;
+  await Product.findByIdAndDelete(productid);
   res.redirect("/products");
 });
 
