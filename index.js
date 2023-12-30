@@ -10,7 +10,6 @@ const User = require("./models/User");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const userRoutes = require("./routes/userRoutes");
-// var cookieParser = require("cookie-parser");
 var flash = require("connect-flash");
 const reviewRoutes=require("./routes/reviewRoutes")
 mongoose
@@ -50,14 +49,12 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 app.use(flash());
 
-
-
 app.use((req, res, next) => {
+  res.locals.currentUser=req.user
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
   next();
 });
-
 app.use(productRoutes);
 app.use(reviewRoutes)
 app.use(userRoutes);

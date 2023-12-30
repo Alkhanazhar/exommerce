@@ -1,7 +1,7 @@
 <% layout('layouts/boilerplate') %>
 
 
-    <form class="w-75 mx-auto" action="/signup" method="post">
+    <form class="w-75 mx-auto bg-review" action="/signup" method="post">
         <h1>Sign Up</h1>
         <div class="mb-3 ">
             <label for="username" class="form-label">username</label>
@@ -11,6 +11,19 @@
             <label for="email" class="form-label">Email address</label>
             <input type="email" class="form-control" id="email" name="email" aria-describedby="email">
             <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+        </div>
+        <div class="mb-3">
+            <h6>want to be register as</h6>
+            <div class="mx-3">
+
+            <label for="buyer">buyer</label>
+            <input type="radio" name="role" value="buyer" id="role">
+            </div>
+
+            <div class="mx-3">
+                <label for="seller">seller</label>
+                <input type="radio" name="role" value="seller" id="role">
+            </div>
         </div>
         <div class="mb-3">
             <label for="password" class="form-label">Password</label>

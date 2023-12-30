@@ -1,10 +1,10 @@
-const isLogin = (req, res, next) => {
-
+const isLoggedIn = (req, res, next) => {
+  req.session.requiredUrl = req.originalUrl  
   if (!req.isAuthenticated()) {
-    req.flash("error", "bhaiya baat nhi bani");
+    req.flash("error", "you have to login first");
     res.redirect("/login");
   }
   next();
 };
 
-module.exports=isLogin
+module.exports = isLoggedIn

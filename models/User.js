@@ -6,6 +6,10 @@ const userSchema = new Schema({
     trim: true,
     required: true,
   },
+  role: {
+    type: String,
+    default: "buyer",
+  }
 });
 
 userSchema.plugin(passportLocalMongoose);

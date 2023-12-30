@@ -9,27 +9,45 @@ router.get("/signup", (req, res) => {
     res.render("auth/signup");
 
   } catch (e) {
-    res.status(500).render("error",{err:e.message})
+    res.status(500).render("error", { err: e.message })
   }
 });
 router.get("/login", (req, res) => {
-  res.render("auth/login");
+  try {
+    res.render("auth/login");
+
+  } catch (e) {
+    res.status(500).render("error", { err: e.message })
+
+  }
 });
 router.post("/login", passport.authenticate("local", {
-    failureRedirect: "/signup",
-    failureFlash:true
-  }),
+  failureRedirect: "/signup",
+  failureFlash: true
+}),
   (req, res) => {
     req.flash("success", "You are now logged in.");
     res.redirect("/products")
   }
 );
 
+
+router.post('/logout', function (req, res, next) {
+  req.logout(function (err) {
+    if (err) { return next(err); }
+    req.flash("success", "succefully logged out")
+    res.redirect('/products');
+  });
+});
 router.post("/signup", async (req, res) => {
-  const { username, email, password } = req.body;
-  const newUSer = new User({ username, email });
-  await User.register(newUSer, password);
-req.flash("success","You have successfully signed up.")
-  res.redirect("/login");
+  try {
+    const { username, email, role, password } = req.body;
+    const newUSer = new User({ username, email, role });
+    await User.register(newUSer, password);
+    req.flash("success", "You have successfully signed up.")
+    res.redirect("/login");
+  } catch (e) {
+    res.status(500).render("error", { err: e.message })
+  }
 });
 module.exports = router;
